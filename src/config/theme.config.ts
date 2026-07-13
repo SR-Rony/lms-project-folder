@@ -1,25 +1,30 @@
 /**
- * Design tokens — source of truth mirrors `globals.css` for docs and tooling.
- * Prefer Tailwind semantic classes (`bg-background`, `bg-card`, etc.) in components.
+ * 10 Minute School inspired design tokens — mirrors `globals.css`.
  */
 export const themeConfig = {
   font: {
     sans: "Plus Jakarta Sans",
   },
   backgrounds: {
-    page: "#f8fafc",
-    canvas: "#eef2f7",
-    muted: "#f1f5f9",
+    page: "#fff8f8",
+    canvas: "#f0f1f7",
+    muted: "#fdf2f2",
     card: "#ffffff",
     elevated: "#ffffff",
   },
   colors: {
-    primary: "#2563eb",
-    primaryHover: "#1d4ed8",
-    primaryMuted: "#eff6ff",
-    accent: "#6366f1",
-    foreground: "#0f172a",
-    mutedForeground: "#64748b",
-    border: "#e2e8f0",
+    primary: "#eb2026",
+    primaryHover: "#d0181e",
+    primaryMuted: "#fff0f0",
+    accent: "#ff6b35",
+    accentPurple: "#5e37ea",
+    accentGreen: "#389452",
+    foreground: "#1a1a2e",
+    mutedForeground: "#58688b",
+    border: "#f0e4e4",
+  },
+  gradients: {
+    brand: "linear-gradient(135deg, #eb2026 0%, #ff6b35 100%)",
+    hero: "linear-gradient(180deg, #fff5f5 0%, #fff8f8 40%, #ffffff 100%)",
   },
 } as const;

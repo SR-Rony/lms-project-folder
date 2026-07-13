@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { GraduationCap, LayoutDashboard, ShieldCheck } from "lucide-react";
 import { ROUTES } from "@/constants";
-import { HomeHero } from "@/components/public/home";
+import { HomeHero, HomeStatsSection } from "@/components/public/home";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -33,6 +33,7 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
+      <HomeStatsSection />
 
       <section className="border-t border-border bg-section">
         <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 lg:py-20">
@@ -47,9 +48,9 @@ export default function HomePage() {
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {roles.map(({ title, description, icon: Icon, href, cta }) => (
-              <Card key={title} className="border-border shadow-sm transition-shadow hover:shadow-md">
+              <Card key={title} interactive className="border-border">
                 <CardHeader className="space-y-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-accent/15">
                     <Icon className="h-5 w-5 text-primary" aria-hidden />
                   </div>
                   <CardTitle className="text-lg">{title}</CardTitle>

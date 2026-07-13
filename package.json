@@ -2,12 +2,12 @@
   "name": "lms-project",
   "version": "0.1.0",
   "private": true,
-  "description": "Enterprise LMS frontend template — Next.js, TypeScript, mock-ready services",
+  "description": "Enterprise LMS frontend template \u2014 Next.js, TypeScript, mock-ready services",
   "scripts": {
-    "dev": "next dev",
-    "dev:turbopack": "next dev --turbopack",
+    "dev": "node api.js && next dev",
+    "dev:turbopack": "node api.js && next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "node api.js && next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "scaffold:admin": "node scripts/scaffold-admin-module.mjs"

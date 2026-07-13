@@ -10,8 +10,6 @@ build/
 dist/
 
 # Env
-.env
-.env.local
 .env.*.local
 
 # Debug
@@ -21,7 +19,6 @@ yarn-error.log*
 
 # IDE
 .idea/
-.vscode/
 *.swp
 *.swo
 
@@ -34,3 +31,4 @@ next-env.d.ts
 
 # Vercel
 .vercel
+config.bat

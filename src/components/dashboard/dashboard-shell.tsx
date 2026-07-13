@@ -20,7 +20,7 @@ export function DashboardShell({
   headerTitle,
 }: DashboardShellProps) {
   return (
-    <div className="min-h-screen bg-[#ececec]">
+    <div className="min-h-screen bg-shell">
       <div className="flex min-h-screen">
         <DashboardSidebar items={navItems} footerItems={footerNavItems} roleLabel={roleLabel} />
         <div className="flex min-w-0 flex-1 flex-col">

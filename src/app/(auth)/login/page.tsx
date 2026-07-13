@@ -5,7 +5,7 @@ export const metadata = { title: "Login" };
 
 export default function LoginPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#ececec] p-4">
+    <div className="flex min-h-screen items-center justify-center bg-shell p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Sign in</CardTitle>

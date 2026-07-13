@@ -63,7 +63,7 @@ function NavLink({
           "flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition-colors",
           active
             ? "bg-primary/10 text-primary"
-            : "text-[#1a1a1a] hover:bg-[#fafafa]"
+            : "text-foreground hover:bg-muted"
         )}
       >
         {Icon ? <Icon className="h-5 w-5 shrink-0" aria-hidden /> : null}
@@ -77,7 +77,7 @@ function NavLink({
       href={item.href}
       className={cn(
         "relative rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-        active ? "text-[#1a1a1a]" : "text-[#757575] hover:bg-[#fafafa] hover:text-[#1a1a1a]"
+        active ? "text-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"
       )}
     >
       {item.title}
@@ -97,14 +97,14 @@ function DesktopAuthButtons() {
     <div className="flex items-center gap-2.5">
       <Link
         href={ROUTES.auth.login}
-        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-[#ebe8e6] bg-white px-4 text-sm font-semibold text-[#1a1a1a] transition-all hover:border-[#d9d4d1] hover:bg-[#fafafa]"
+        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground transition-all hover:border-border hover:bg-muted"
       >
         <LogIn className="h-4 w-4" aria-hidden />
         Sign in
       </Link>
       <Link
         href={ROUTES.auth.register}
-        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-white shadow-[0_10px_28px_-12px_rgba(255,71,71,0.95)] transition-all hover:bg-[#e63e3e] hover:shadow-[0_14px_32px_-12px_rgba(255,71,71,1)]"
+        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-[0_10px_28px_-12px_rgba(37,99,235,0.45)] transition-all hover:bg-primary-hover hover:shadow-[0_14px_32px_-12px_rgba(37,99,235,0.55)]"
       >
         Get started
         <ArrowRight className="h-4 w-4" aria-hidden />
@@ -116,12 +116,12 @@ function DesktopAuthButtons() {
 function MobileDrawerAuthButtons({ onNavigate }: { onNavigate: () => void }) {
   return (
     <div className="space-y-3">
-      <p className="text-center text-xs font-medium text-[#757575]">Start your learning journey today</p>
+      <p className="text-center text-xs font-medium text-muted-foreground">Start your learning journey today</p>
       <div className="grid grid-cols-2 gap-2.5">
         <Link
           href={ROUTES.auth.login}
           onClick={onNavigate}
-          className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-[#ebe8e6] bg-white px-3 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-[#fafafa] active:scale-[0.98]"
+          className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-border bg-card px-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted active:scale-[0.98]"
         >
           <LogIn className="h-4 w-4 shrink-0" aria-hidden />
           Sign in
@@ -129,7 +129,7 @@ function MobileDrawerAuthButtons({ onNavigate }: { onNavigate: () => void }) {
         <Link
           href={ROUTES.auth.register}
           onClick={onNavigate}
-          className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-primary px-3 text-sm font-semibold text-white shadow-[0_10px_24px_-12px_rgba(255,71,71,0.9)] transition-colors hover:bg-[#e63e3e] active:scale-[0.98]"
+          className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-primary px-3 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_rgba(37,99,235,0.45)] transition-colors hover:bg-primary-hover active:scale-[0.98]"
         >
           <UserPlus className="h-4 w-4 shrink-0" aria-hidden />
           Get started
@@ -178,8 +178,8 @@ export function PublicHeader() {
       className={cn(
         "sticky top-0 z-50 border-b transition-all duration-300",
         scrolled
-          ? "border-[#ebe8e6] bg-white/95 shadow-[0_8px_30px_-12px_rgba(26,26,26,0.12)] backdrop-blur-md"
-          : "border-[#ebe8e6]/60 bg-white/90 backdrop-blur-sm"
+          ? "border-border bg-card/95 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.1)] backdrop-blur-md"
+          : "border-border/60 bg-card/90 backdrop-blur-sm"
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 md:px-6 lg:h-[4.25rem]">
@@ -203,7 +203,7 @@ export function PublicHeader() {
         {/* Mobile: logo + menu toggle only */}
         <button
           type="button"
-          className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#ebe8e6] bg-white text-[#1a1a1a] transition-colors hover:bg-[#fafafa] lg:hidden"
+          className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card text-foreground transition-colors hover:bg-muted lg:hidden"
           aria-expanded={mobileOpen}
           aria-controls="mobile-navigation"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -219,7 +219,7 @@ export function PublicHeader() {
             <motion.button
               type="button"
               aria-label="Close menu overlay"
-              className="fixed inset-0 top-16 z-40 bg-[#1a1a1a]/20 lg:hidden"
+              className="fixed inset-0 top-16 z-40 bg-foreground/20 lg:hidden"
               initial={prefersReducedMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={prefersReducedMotion ? undefined : { opacity: 0 }}
@@ -232,7 +232,7 @@ export function PublicHeader() {
               role="dialog"
               aria-modal="true"
               aria-label="Mobile navigation"
-              className="fixed inset-x-0 top-16 z-50 flex max-h-[calc(100dvh-4rem)] flex-col border-b border-[#ebe8e6] bg-white shadow-xl lg:hidden"
+              className="fixed inset-x-0 top-16 z-50 flex max-h-[calc(100dvh-4rem)] flex-col border-b border-border bg-card shadow-xl lg:hidden"
               initial={prefersReducedMotion ? false : { opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={prefersReducedMotion ? undefined : { opacity: 0, y: -12 }}
@@ -253,7 +253,7 @@ export function PublicHeader() {
                 ))}
               </nav>
 
-              <div className="sticky bottom-0 border-t border-[#ebe8e6] bg-gradient-to-t from-white via-white to-white/95 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-[0_-12px_32px_-20px_rgba(26,26,26,0.18)]">
+              <div className="sticky bottom-0 border-t border-border bg-gradient-to-t from-card via-card to-card/95 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-[0_-12px_32px_-20px_rgba(15,23,42,0.12)]">
                 <MobileDrawerAuthButtons onNavigate={closeMobileMenu} />
               </div>
             </motion.div>

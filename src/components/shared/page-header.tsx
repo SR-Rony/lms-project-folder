@@ -9,8 +9,8 @@ interface PageHeaderProps {
 export function PageHeader({ title, description, className }: PageHeaderProps) {
   return (
     <div className={cn("mb-6", className)}>
-      <h1 className="text-2xl font-bold text-[#1a1a1a] sm:text-3xl">{title}</h1>
-      {description ? <p className="mt-2 text-sm text-[#757575] sm:text-base">{description}</p> : null}
+      <h1 className="text-2xl font-bold text-foreground sm:text-3xl">{title}</h1>
+      {description ? <p className="mt-2 text-sm text-muted-foreground sm:text-base">{description}</p> : null}
     </div>
   );
 }

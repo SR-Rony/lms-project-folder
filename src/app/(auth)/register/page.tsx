@@ -7,13 +7,13 @@ export const metadata = { title: "Create account" };
 
 export default function RegisterPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#ececec] p-4">
+    <div className="flex min-h-screen items-center justify-center bg-shell p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Create your account</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-sm text-[#757575]">
+          <p className="text-sm text-muted-foreground">
             Registration will connect to your auth backend. For now, sign in with the demo flow or browse
             courses as a guest.
           </p>

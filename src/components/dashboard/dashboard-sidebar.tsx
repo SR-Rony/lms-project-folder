@@ -22,7 +22,7 @@ function NavLink({ item }: { item: NavItem }) {
       href={item.href}
       className={cn(
         "block rounded-xl px-3 py-2 text-sm font-medium transition-colors",
-        active ? "bg-primary/10 text-primary" : "text-[#757575] hover:bg-[#fafafa] hover:text-[#1a1a1a]"
+        active ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"
       )}
     >
       {item.title}
@@ -32,9 +32,9 @@ function NavLink({ item }: { item: NavItem }) {
 
 export function DashboardSidebar({ items, footerItems = [], roleLabel }: DashboardSidebarProps) {
   return (
-    <aside className="hidden w-64 shrink-0 border-r border-[#ebe8e6] bg-white lg:block">
-      <div className="border-b border-[#ebe8e6] px-4 py-5">
-        <p className="text-xs font-semibold uppercase tracking-wide text-[#9ca3af]">{roleLabel}</p>
+    <aside className="hidden w-64 shrink-0 border-r border-border bg-card lg:block">
+      <div className="border-b border-border px-4 py-5">
+        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{roleLabel}</p>
       </div>
       <nav className="space-y-1 p-3">
         {items.map((item) => (
@@ -42,7 +42,7 @@ export function DashboardSidebar({ items, footerItems = [], roleLabel }: Dashboa
         ))}
       </nav>
       {footerItems.length > 0 ? (
-        <nav className="mt-auto space-y-1 border-t border-[#ebe8e6] p-3">
+        <nav className="mt-auto space-y-1 border-t border-border p-3">
           {footerItems.map((item) => (
             <NavLink key={item.title} item={item} />
           ))}

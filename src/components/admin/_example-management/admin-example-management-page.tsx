@@ -16,8 +16,8 @@ export function AdminExampleManagementPage({ data }: { data: AdminExampleManagem
   }, [data.items, data.pageSize, search]);
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#ebe8e6] bg-white shadow-[0_8px_30px_rgba(35,25,22,0.04)]">
-      <div className="border-b border-[#ebe8e6] px-5 py-6">
+    <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_8px_30px_rgba(15,23,42,0.04)]">
+      <div className="border-b border-border px-5 py-6">
         <PageHeader
           title="Example Management"
           description="Reference admin CRUD module — copy this pattern for Support, Reports, Activity Log, etc."

@@ -17,7 +17,7 @@ export default async function CoursesPage() {
               <CardTitle>{course.title}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-[#757575]">{course.description}</p>
+              <p className="text-sm text-muted-foreground">{course.description}</p>
               <p className="mt-3 text-sm font-semibold text-primary">${course.price}</p>
             </CardContent>
           </Card>

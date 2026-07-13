@@ -34,20 +34,20 @@ export default function HomePage() {
     <>
       <HomeHero />
 
-      <section className="border-t border-[#ebe8e6] bg-white">
+      <section className="border-t border-border bg-section">
         <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 lg:py-20">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-2xl font-bold text-[#1a1a1a] sm:text-3xl">
+            <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
               Built for every role in your institution
             </h2>
-            <p className="mt-3 text-[#757575]">
+            <p className="mt-3 text-muted-foreground">
               One platform with dedicated dashboards for students, teachers, and administrators.
             </p>
           </div>
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {roles.map(({ title, description, icon: Icon, href, cta }) => (
-              <Card key={title} className="border-[#ebe8e6] shadow-sm transition-shadow hover:shadow-md">
+              <Card key={title} className="border-border shadow-sm transition-shadow hover:shadow-md">
                 <CardHeader className="space-y-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10">
                     <Icon className="h-5 w-5 text-primary" aria-hidden />
@@ -55,7 +55,7 @@ export default function HomePage() {
                   <CardTitle className="text-lg">{title}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm leading-relaxed text-[#757575]">{description}</p>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
                   <Button asChild variant="outline" size="sm" className="w-full sm:w-auto">
                     <Link href={href}>{cta}</Link>
                   </Button>

@@ -12,7 +12,7 @@ export default function StudentDashboardPage() {
               <CardTitle>{item}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-[#757575]">Module placeholder — implement in features/ or components/student/.</p>
+              <p className="text-sm text-muted-foreground">Module placeholder — implement in features/ or components/student/.</p>
             </CardContent>
           </Card>
         ))}

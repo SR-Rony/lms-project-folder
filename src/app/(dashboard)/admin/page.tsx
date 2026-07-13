@@ -12,7 +12,7 @@ export default function AdminDashboardPage() {
               <CardTitle>{item}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-[#757575]">Connect analytics service when backend is ready.</p>
+              <p className="text-sm text-muted-foreground">Connect analytics service when backend is ready.</p>
             </CardContent>
           </Card>
         ))}

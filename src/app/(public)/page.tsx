@@ -1,38 +1,70 @@
 import Link from "next/link";
-import { siteConfig } from "@/config";
+import { GraduationCap, LayoutDashboard, ShieldCheck } from "lucide-react";
 import { ROUTES } from "@/constants";
+import { HomeHero } from "@/components/public/home";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+const roles = [
+  {
+    title: "Students",
+    description: "Enroll in courses, track progress, earn certificates, and join live sessions.",
+    icon: GraduationCap,
+    href: ROUTES.auth.login,
+    cta: "Start learning",
+  },
+  {
+    title: "Teachers",
+    description: "Create courses, manage learners, run live classes, and monitor performance.",
+    icon: LayoutDashboard,
+    href: ROUTES.auth.login,
+    cta: "Teach on platform",
+  },
+  {
+    title: "Admins",
+    description: "Oversee users, content, support tickets, and platform-wide analytics.",
+    icon: ShieldCheck,
+    href: ROUTES.auth.login,
+    cta: "Manage platform",
+  },
+] as const;
+
 export default function HomePage() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 md:px-6">
-      <div className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-wide text-primary">{siteConfig.tagline}</p>
-        <h1 className="mt-3 text-4xl font-bold text-[#1a1a1a] sm:text-5xl">{siteConfig.name}</h1>
-        <p className="mt-4 text-lg text-[#757575]">{siteConfig.description}</p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button asChild>
-            <Link href={ROUTES.courses}>Browse courses</Link>
-          </Button>
-          <Button asChild variant="outline">
-            <Link href={ROUTES.auth.login}>Sign in</Link>
-          </Button>
-        </div>
-      </div>
+    <>
+      <HomeHero />
 
-      <div className="mt-12 grid gap-4 md:grid-cols-3">
-        {["Students", "Teachers", "Admins"].map((role) => (
-          <Card key={role}>
-            <CardHeader>
-              <CardTitle>{role}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-[#757575]">Role-based dashboards with shared shell architecture.</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </section>
+      <section className="border-t border-[#ebe8e6] bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 lg:py-20">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl font-bold text-[#1a1a1a] sm:text-3xl">
+              Built for every role in your institution
+            </h2>
+            <p className="mt-3 text-[#757575]">
+              One platform with dedicated dashboards for students, teachers, and administrators.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {roles.map(({ title, description, icon: Icon, href, cta }) => (
+              <Card key={title} className="border-[#ebe8e6] shadow-sm transition-shadow hover:shadow-md">
+                <CardHeader className="space-y-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10">
+                    <Icon className="h-5 w-5 text-primary" aria-hidden />
+                  </div>
+                  <CardTitle className="text-lg">{title}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-sm leading-relaxed text-[#757575]">{description}</p>
+                  <Button asChild variant="outline" size="sm" className="w-full sm:w-auto">
+                    <Link href={href}>{cta}</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

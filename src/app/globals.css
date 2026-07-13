@@ -9,6 +9,8 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-muted: var(--primary-muted);
   --color-accent: var(--accent);
+  --color-accent-purple: var(--accent-purple);
+  --color-accent-green: var(--accent-green);
   --color-border: var(--border);
   --color-surface: var(--surface);
   --color-canvas: var(--canvas);
@@ -16,39 +18,87 @@
   --color-muted: var(--muted);
   --color-elevated: var(--elevated);
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --animate-blob: blob-float 8s ease-in-out infinite;
+  --animate-blob-delayed: blob-float 10s ease-in-out infinite 2s;
+  --animate-float: gentle-float 6s ease-in-out infinite;
+  --animate-gradient: gradient-shift 6s ease infinite;
 }
 
 :root {
-  /*
-   * Background layers (lightest → elevated)
-   * background — page shell
-   * canvas     — dashboard / auth outer area
-   * muted      — alternating sections, hovers, footer bands
-   * card       — cards, navbar, sidebar, modals
-   * elevated   — highest lift (dropdowns, popovers)
-   */
-  --background: #f8fafc;
-  --canvas: #eef2f7;
-  --muted: #f1f5f9;
+  /* 10 Minute School inspired — warm edtech palette */
+  --background: #fff8f8;
+  --canvas: #f0f1f7;
+  --muted: #fdf2f2;
   --surface: #ffffff;
   --card: #ffffff;
   --elevated: #ffffff;
 
-  /* Typography */
-  --foreground: #0f172a;
-  --muted-foreground: #64748b;
+  --foreground: #1a1a2e;
+  --muted-foreground: #58688b;
 
-  /* Brand */
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
+  /* Brand red + warm orange gradient (10MS signature) */
+  --primary: #eb2026;
+  --primary-hover: #d0181e;
   --primary-foreground: #ffffff;
-  --primary-muted: #eff6ff;
-  --accent: #6366f1;
+  --primary-muted: #fff0f0;
+  --accent: #ff6b35;
+  --accent-purple: #5e37ea;
+  --accent-green: #389452;
 
-  /* Structure */
-  --border: #e2e8f0;
+  --border: #f0e4e4;
 
   --font-jakarta: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --gradient-brand: linear-gradient(135deg, #eb2026 0%, #ff6b35 100%);
+  --gradient-hero: linear-gradient(180deg, #fff5f5 0%, #fff8f8 40%, #ffffff 100%);
+  --gradient-card-hover: linear-gradient(135deg, rgba(235, 32, 38, 0.04) 0%, rgba(255, 107, 53, 0.06) 100%);
+  --shadow-brand: 0 12px 32px -10px rgba(235, 32, 38, 0.35);
+  --shadow-card-hover: 0 20px 48px -16px rgba(235, 32, 38, 0.18);
+}
+
+@keyframes blob-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(24px, -20px) scale(1.06);
+  }
+  66% {
+    transform: translate(-18px, 14px) scale(0.94);
+  }
+}
+
+@keyframes gentle-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.08);
+  }
 }
 
 @layer base {
@@ -63,8 +113,9 @@
   body {
     @apply min-h-screen bg-background font-sans text-foreground antialiased;
     background-image:
-      radial-gradient(ellipse 90% 60% at 50% -30%, rgba(37, 99, 235, 0.06), transparent 55%),
-      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(99, 102, 241, 0.04), transparent 50%);
+      radial-gradient(ellipse 90% 55% at 10% -15%, rgba(235, 32, 38, 0.09), transparent 55%),
+      radial-gradient(ellipse 70% 45% at 95% 5%, rgba(255, 107, 53, 0.07), transparent 50%),
+      radial-gradient(ellipse 50% 35% at 50% 100%, rgba(94, 55, 234, 0.04), transparent 55%);
     background-attachment: fixed;
   }
 
@@ -85,7 +136,9 @@
 
   .bg-shell {
     background-color: var(--canvas);
-    background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37, 99, 235, 0.05), transparent 60%);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(235, 32, 38, 0.06), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 100% 50%, rgba(255, 107, 53, 0.05), transparent 55%);
   }
 
   .bg-section {
@@ -94,5 +147,53 @@
 
   .bg-section-muted {
     background-color: var(--muted);
+  }
+
+  .bg-gradient-hero {
+    background-image: var(--gradient-hero);
+  }
+
+  .bg-gradient-brand {
+    background-image: var(--gradient-brand);
+  }
+
+  .text-gradient-brand {
+    background-image: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .shadow-brand {
+    box-shadow: var(--shadow-brand);
+  }
+
+  .card-interactive {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .card-interactive:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(235, 32, 38, 0.22);
+    background-image: var(--gradient-card-hover);
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .card-interactive:hover {
+    transform: none;
   }
 }

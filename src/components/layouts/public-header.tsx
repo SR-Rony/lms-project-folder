@@ -43,11 +43,13 @@ function NavLink({
   pathname,
   onNavigate,
   variant = "desktop",
+  transparent = false,
 }: {
   item: NavItem;
   pathname: string;
   onNavigate?: () => void;
   variant?: "desktop" | "mobile";
+  transparent?: boolean;
 }) {
   if (!item.href) return null;
 
@@ -77,7 +79,8 @@ function NavLink({
       href={item.href}
       className={cn(
         "relative rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-        active ? "text-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"
+        active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+        transparent ? "hover:bg-foreground/5" : "hover:bg-muted"
       )}
     >
       {item.title}
@@ -92,19 +95,24 @@ function NavLink({
   );
 }
 
-function DesktopAuthButtons() {
+function DesktopAuthButtons({ transparent }: { transparent: boolean }) {
   return (
     <div className="flex items-center gap-2.5">
       <Link
         href={ROUTES.auth.login}
-        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground transition-all hover:border-border hover:bg-muted"
+        className={cn(
+          "inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition-all",
+          transparent
+            ? "text-foreground hover:bg-foreground/5"
+            : "border border-border bg-card text-foreground hover:bg-muted"
+        )}
       >
         <LogIn className="h-4 w-4" aria-hidden />
         Sign in
       </Link>
       <Link
         href={ROUTES.auth.register}
-        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-[0_10px_28px_-12px_rgba(37,99,235,0.45)] transition-all hover:bg-primary-hover hover:shadow-[0_14px_32px_-12px_rgba(37,99,235,0.55)]"
+        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent px-5 text-sm font-semibold text-primary-foreground shadow-brand transition-all duration-300 hover:from-primary-hover hover:to-accent hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-10px_rgba(235,32,38,0.45)]"
       >
         Get started
         <ArrowRight className="h-4 w-4" aria-hidden />
@@ -129,7 +137,7 @@ function MobileDrawerAuthButtons({ onNavigate }: { onNavigate: () => void }) {
         <Link
           href={ROUTES.auth.register}
           onClick={onNavigate}
-          className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-primary px-3 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_rgba(37,99,235,0.45)] transition-colors hover:bg-primary-hover active:scale-[0.98]"
+          className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent px-3 text-sm font-semibold text-primary-foreground shadow-brand transition-all duration-300 hover:from-primary-hover hover:to-accent active:scale-[0.98]"
         >
           <UserPlus className="h-4 w-4 shrink-0" aria-hidden />
           Get started
@@ -145,10 +153,14 @@ export function PublicHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const isHomePage = pathname === ROUTES.home;
+  const isTransparent = isHomePage && !scrolled && !mobileOpen;
+  const showSolidHeader = !isTransparent;
+
   const closeMobileMenu = () => setMobileOpen(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -156,6 +168,7 @@ export function PublicHeader() {
 
   useEffect(() => {
     setMobileOpen(false);
+    setScrolled(window.scrollY > 20);
   }, [pathname]);
 
   useEffect(() => {
@@ -176,10 +189,10 @@ export function PublicHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b transition-all duration-300",
-        scrolled
-          ? "border-border bg-card/95 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.1)] backdrop-blur-md"
-          : "border-border/60 bg-card/90 backdrop-blur-sm"
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        showSolidHeader
+          ? "border-b border-border bg-card/95 shadow-[0_8px_30px_-12px_rgba(235,32,38,0.08)] backdrop-blur-md"
+          : "border-b border-transparent bg-transparent shadow-none"
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 md:px-6 lg:h-[4.25rem]">
@@ -191,19 +204,22 @@ export function PublicHeader() {
           className="hidden flex-1 items-center justify-center gap-1 xl:gap-2 lg:flex"
         >
           {publicNav.map((item) => (
-            <NavLink key={item.title} item={item} pathname={pathname} />
+            <NavLink key={item.title} item={item} pathname={pathname} transparent={isTransparent} />
           ))}
         </nav>
 
         {/* Desktop (lg+): Sign in + Get started */}
         <div className="hidden shrink-0 lg:block">
-          <DesktopAuthButtons />
+          <DesktopAuthButtons transparent={isTransparent} />
         </div>
 
         {/* Mobile: logo + menu toggle only */}
         <button
           type="button"
-          className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card text-foreground transition-colors hover:bg-muted lg:hidden"
+          className={cn(
+            "ml-auto inline-flex h-10 w-10 items-center justify-center rounded-xl text-foreground transition-colors lg:hidden",
+            isTransparent ? "hover:bg-foreground/5" : "border border-border bg-card hover:bg-muted"
+          )}
           aria-expanded={mobileOpen}
           aria-controls="mobile-navigation"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
